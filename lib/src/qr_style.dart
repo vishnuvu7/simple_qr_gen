@@ -3,7 +3,6 @@ import 'package:qr/qr.dart';
 
 import 'qr_shape.dart';
 
-/// Configuration class for customizing QR code appearance.
 class QrStyle {
   /// Creates a new [QrStyle] with the specified options.
   const QrStyle({

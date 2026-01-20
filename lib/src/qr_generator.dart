@@ -7,11 +7,9 @@ import 'package:qr/qr.dart';
 import 'qr_shape.dart';
 import 'qr_style.dart';
 
-/// A utility class for generating QR codes programmatically.
 class QrGenerator {
   QrGenerator._();
 
-  /// Generates a QR code image from the given data.
   static QrImage generateQrImage(String data, int errorCorrectionLevel) {
     final qrCode = QrCode.fromData(
       data: data,
@@ -20,7 +18,6 @@ class QrGenerator {
     return QrImage(qrCode);
   }
 
-  /// Gets the module count for a QR code with given data.
   static int getModuleCount(String data, int errorCorrectionLevel) {
     final qrCode = QrCode.fromData(
       data: data,
@@ -48,18 +45,15 @@ class QrGenerator {
     final recorder = ui.PictureRecorder();
     final canvas = Canvas(recorder);
 
-    // Draw background
     final backgroundPaint = Paint()
       ..color = style.backgroundColor
       ..style = PaintingStyle.fill;
     canvas.drawRect(Rect.fromLTWH(0, 0, size, size), backgroundPaint);
 
-    // Draw QR modules
     final foregroundPaint = Paint()
       ..color = style.foregroundColor
       ..style = PaintingStyle.fill;
 
-    // Calculate logo safe area if logo is present
     Rect? logoSafeArea;
     if (logoImage != null || style.logo != null) {
       final logoTotalSize = style.logoSize + (style.logoPadding * 2);
@@ -72,7 +66,6 @@ class QrGenerator {
       );
     }
 
-    // Draw finder patterns first
     _drawFinderPatterns(
       canvas,
       foregroundPaint,
@@ -82,10 +75,8 @@ class QrGenerator {
       style.shape,
     );
 
-    // Draw regular modules (excluding finder patterns and logo area)
     for (int x = 0; x < moduleCount; x++) {
       for (int y = 0; y < moduleCount; y++) {
-        // Skip finder pattern areas
         if (_isFinderPattern(x, y, moduleCount)) continue;
 
         if (qrImage.isDark(y, x)) {
@@ -93,7 +84,6 @@ class QrGenerator {
           final py = y * moduleSize;
           final moduleRect = Rect.fromLTWH(px, py, moduleSize, moduleSize);
 
-          // Skip if module is in logo safe area
           if (logoSafeArea != null && logoSafeArea.overlaps(moduleRect)) {
             continue;
           }
@@ -112,11 +102,9 @@ class QrGenerator {
       }
     }
 
-    // Draw logo if provided
     if (logoImage != null) {
       final logoOffset = (size - style.logoSize) / 2;
 
-      // Draw white background behind logo
       final logoBgPaint = Paint()
         ..color = style.backgroundColor
         ..style = PaintingStyle.fill;
@@ -156,18 +144,13 @@ class QrGenerator {
     return byteData!.buffer.asUint8List();
   }
 
-  /// Checks if the given coordinates are part of a finder pattern.
   static bool _isFinderPattern(int x, int y, int moduleCount) {
-    // Top-left finder pattern
     if (x < 7 && y < 7) return true;
-    // Top-right finder pattern
     if (x >= moduleCount - 7 && y < 7) return true;
-    // Bottom-left finder pattern
     if (x < 7 && y >= moduleCount - 7) return true;
     return false;
   }
 
-  /// Draws the three finder patterns (the large squares in corners).
   static void _drawFinderPatterns(
     Canvas canvas,
     Paint foregroundPaint,

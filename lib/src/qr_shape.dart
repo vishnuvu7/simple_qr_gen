@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Defines the shape style for QR code modules.
 enum QrShape {
   /// Standard square modules
   square,

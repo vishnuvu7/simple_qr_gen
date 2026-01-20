@@ -11,32 +11,24 @@ import 'qr_style.dart';
 
 /// Result of a QR code share operation.
 class QrShareResult {
-  /// Creates a new share result.
   const QrShareResult({
     required this.success,
     this.bytes,
     this.errorMessage,
   });
 
-  /// Whether the share was successful.
   final bool success;
 
   /// The raw image bytes.
   final Uint8List? bytes;
 
-  /// Error message if the share failed.
   final String? errorMessage;
 }
 
-/// Utility class for sharing QR code images.
-///
-/// Supports all platforms via share_plus package.
+
 class QrSharer {
   QrSharer._();
 
-  /// Generates a QR code and shares it using the native share dialog.
-  ///
-  /// Returns a [QrShareResult] with the operation status.
   static Future<QrShareResult> share({
     required String data,
     required double size,
@@ -90,9 +82,7 @@ class QrSharer {
     }
   }
 
-  /// Gets the raw QR code image bytes without sharing.
-  ///
-  /// Useful when you need to handle the image data yourself.
+
   static Future<Uint8List> getImageBytes({
     required String data,
     required double size,

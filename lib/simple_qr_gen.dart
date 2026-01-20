@@ -1,6 +1,4 @@
-/// A Flutter package for generating customizable QR codes with advanced
-/// styling options and cross-platform share functionality.
-library simple_qr_gen;
+library;
 
 export 'src/qr_style.dart';
 export 'src/qr_shape.dart';
