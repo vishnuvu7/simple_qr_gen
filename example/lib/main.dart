@@ -226,7 +226,6 @@ class _QrGeneratorPageState extends State<QrGeneratorPage>
                           foregroundColor: _foregroundColor,
                           backgroundColor: _backgroundColor,
                           shape: _selectedShape,
-                          logo: const AssetImage('assets/logo.png'),
                           errorCorrectionLevel: 2,
                         ),
                       ),
