@@ -1,0 +1,109 @@
+import 'dart:io';
+import 'dart:typed_data';
+import 'dart:ui' as ui;
+
+import 'package:flutter/foundation.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:share_plus/share_plus.dart';
+
+import 'qr_generator.dart';
+import 'qr_style.dart';
+
+/// Result of a QR code share operation.
+class QrShareResult {
+  /// Creates a new share result.
+  const QrShareResult({
+    required this.success,
+    this.bytes,
+    this.errorMessage,
+  });
+
+  /// Whether the share was successful.
+  final bool success;
+
+  /// The raw image bytes.
+  final Uint8List? bytes;
+
+  /// Error message if the share failed.
+  final String? errorMessage;
+}
+
+/// Utility class for sharing QR code images.
+///
+/// Supports all platforms via share_plus package.
+class QrSharer {
+  QrSharer._();
+
+  /// Generates a QR code and shares it using the native share dialog.
+  ///
+  /// Returns a [QrShareResult] with the operation status.
+  static Future<QrShareResult> share({
+    required String data,
+    required double size,
+    QrStyle style = const QrStyle(),
+    String fileName = 'qr_code',
+    String? shareText,
+    ui.Image? logoImage,
+  }) async {
+    try {
+      // Generate QR code bytes
+      final bytes = await QrGenerator.generateImageBytes(
+        data: data,
+        size: size,
+        style: style,
+        logoImage: logoImage,
+      );
+
+      if (kIsWeb) {
+        // Web platform - share using XFile from bytes
+        final xFile = XFile.fromData(
+          bytes,
+          name: '$fileName.png',
+          mimeType: 'image/png',
+        );
+
+        await Share.shareXFiles(
+          [xFile],
+          text: shareText,
+        );
+
+        return QrShareResult(success: true, bytes: bytes);
+      }
+
+      // Native platforms - save to temp file first, then share
+      final tempDir = await getTemporaryDirectory();
+      final filePath = '${tempDir.path}/$fileName.png';
+      final file = File(filePath);
+      await file.writeAsBytes(bytes);
+
+      await Share.shareXFiles(
+        [XFile(filePath)],
+        text: shareText,
+      );
+
+      return QrShareResult(success: true, bytes: bytes);
+    } catch (e) {
+      return QrShareResult(
+        success: false,
+        errorMessage: e.toString(),
+      );
+    }
+  }
+
+  /// Gets the raw QR code image bytes without sharing.
+  ///
+  /// Useful when you need to handle the image data yourself.
+  static Future<Uint8List> getImageBytes({
+    required String data,
+    required double size,
+    QrStyle style = const QrStyle(),
+    ui.Image? logoImage,
+  }) async {
+    return QrGenerator.generateImageBytes(
+      data: data,
+      size: size,
+      style: style,
+      logoImage: logoImage,
+    );
+  }
+}
