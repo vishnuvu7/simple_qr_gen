@@ -43,7 +43,7 @@ class _QrGeneratorPageState extends State<QrGeneratorPage>
   Color _foregroundColor = const Color(0xFF1E1B4B);
   Color _backgroundColor = const Color(0xFFF8FAFC);
   QrShape _selectedShape = QrShape.rounded;
-  double _qrSize = 280;
+  final double _qrSize = 280;
   bool _isSharing = false;
 
   late AnimationController _animationController;
@@ -190,7 +190,7 @@ class _QrGeneratorPageState extends State<QrGeneratorPage>
                   'Generate beautiful QR codes instantly',
                   style: TextStyle(
                     fontSize: 16,
-                    color: Colors.white.withOpacity(0.7),
+                    color: Colors.white.withValues(alpha: 0.7),
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -211,7 +211,7 @@ class _QrGeneratorPageState extends State<QrGeneratorPage>
                         borderRadius: BorderRadius.circular(24),
                         boxShadow: [
                           BoxShadow(
-                            color: _foregroundColor.withOpacity(0.3),
+                            color: _foregroundColor.withValues(alpha: 0.3),
                             blurRadius: 40,
                             offset: const Offset(0, 20),
                           ),
@@ -226,6 +226,7 @@ class _QrGeneratorPageState extends State<QrGeneratorPage>
                           foregroundColor: _foregroundColor,
                           backgroundColor: _backgroundColor,
                           shape: _selectedShape,
+                          logo: const AssetImage('assets/logo.png'),
                           errorCorrectionLevel: 2,
                         ),
                       ),
@@ -256,10 +257,10 @@ class _QrGeneratorPageState extends State<QrGeneratorPage>
                         decoration: InputDecoration(
                           hintText: 'Enter text or URL...',
                           hintStyle: TextStyle(
-                            color: Colors.white.withOpacity(0.4),
+                            color: Colors.white.withValues(alpha: 0.4),
                           ),
                           filled: true,
-                          fillColor: Colors.white.withOpacity(0.05),
+                          fillColor: Colors.white.withValues(alpha: 0.05),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide.none,
@@ -338,12 +339,12 @@ class _QrGeneratorPageState extends State<QrGeneratorPage>
                                 decoration: BoxDecoration(
                                   color: isSelected
                                       ? const Color(0xFF6366F1)
-                                      : Colors.white.withOpacity(0.05),
+                                      : Colors.white.withValues(alpha: 0.05),
                                   borderRadius: BorderRadius.circular(12),
                                   border: Border.all(
                                     color: isSelected
                                         ? const Color(0xFF6366F1)
-                                        : Colors.white.withOpacity(0.1),
+                                        : Colors.white.withValues(alpha: 0.1),
                                   ),
                                 ),
                                 child: Column(
@@ -388,7 +389,7 @@ class _QrGeneratorPageState extends State<QrGeneratorPage>
                       borderRadius: BorderRadius.circular(16),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(0xFF6366F1).withOpacity(0.4),
+                          color: const Color(0xFF6366F1).withValues(alpha: 0.4),
                           blurRadius: 20,
                           offset: const Offset(0, 10),
                         ),
@@ -435,10 +436,10 @@ class _QrGeneratorPageState extends State<QrGeneratorPage>
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.05),
+        color: Colors.white.withValues(alpha: 0.05),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: Colors.white.withOpacity(0.1),
+          color: Colors.white.withValues(alpha: 0.1),
         ),
       ),
       child: child,
@@ -455,10 +456,10 @@ class _QrGeneratorPageState extends State<QrGeneratorPage>
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.05),
+          color: Colors.white.withValues(alpha: 0.05),
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: Colors.white.withOpacity(0.1),
+            color: Colors.white.withValues(alpha: 0.1),
           ),
         ),
         child: Row(
@@ -470,7 +471,7 @@ class _QrGeneratorPageState extends State<QrGeneratorPage>
                 color: color,
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(
-                  color: Colors.white.withOpacity(0.2),
+                  color: Colors.white.withValues(alpha: 0.2),
                   width: 2,
                 ),
               ),
@@ -491,7 +492,7 @@ class _QrGeneratorPageState extends State<QrGeneratorPage>
 
   Widget _buildShapeIcon(QrShape shape, bool isSelected) {
     final color = isSelected ? Colors.white : Colors.white54;
-    final size = 20.0;
+    const size = 20.0;
 
     switch (shape) {
       case QrShape.square:
