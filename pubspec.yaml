@@ -1,6 +1,6 @@
 name: simple_qr_gen
 description: A Flutter package for generating customizable QR codes with advanced styling options (colors, logos, shapes) and cross-platform share functionality.
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/vishnuvu7/simple_qr_gen
 repository: https://github.com/vishnuvu7/simple_qr_gen
 
@@ -12,7 +12,6 @@ dependencies:
   flutter:
     sdk: flutter
   qr: ^3.0.2
-  image: ^4.7.2
   path_provider: ^2.1.5
   share_plus: ^12.0.1
 

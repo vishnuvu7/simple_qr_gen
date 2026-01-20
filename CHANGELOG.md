@@ -1,3 +1,7 @@
+## 1.0.1
+
+* Removed unused `image` dependency to fix compatibility issues with packages like `pdf`
+
 ## 1.0.0
 
 * Initial release
