@@ -53,9 +53,11 @@ class QrSharer {
           mimeType: 'image/png',
         );
 
-        await Share.shareXFiles(
-          [xFile],
-          text: shareText,
+        await SharePlus.instance.share(
+          ShareParams(
+            files: [xFile],
+            text: shareText,
+          )
         );
 
         return QrShareResult(success: true, bytes: bytes);
@@ -67,9 +69,12 @@ class QrSharer {
       final file = File(filePath);
       await file.writeAsBytes(bytes);
 
-      await Share.shareXFiles(
-        [XFile(filePath)],
-        text: shareText,
+      await SharePlus.instance.share(
+        ShareParams(
+          files: [XFile(filePath)],
+          text: shareText,
+        )
+
       );
 
       return QrShareResult(success: true, bytes: bytes);
