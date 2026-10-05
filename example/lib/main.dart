@@ -104,7 +104,8 @@ class _QrGeneratorPageState extends State<QrGeneratorPage>
             ],
           ),
           behavior: SnackBarBehavior.floating,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           backgroundColor: const Color(0xFF1E1B4B),
         ),
       );
@@ -226,7 +227,7 @@ class _QrGeneratorPageState extends State<QrGeneratorPage>
                           foregroundColor: _foregroundColor,
                           backgroundColor: _backgroundColor,
                           shape: _selectedShape,
-                          errorCorrectionLevel: 2,
+                          errorCorrectionLevel: QrErrorCorrectLevel.high,
                         ),
                       ),
                     ),
@@ -327,10 +328,12 @@ class _QrGeneratorPageState extends State<QrGeneratorPage>
                           final isSelected = shape == _selectedShape;
                           return Expanded(
                             child: GestureDetector(
-                              onTap: () => setState(() => _selectedShape = shape),
+                              onTap: () =>
+                                  setState(() => _selectedShape = shape),
                               child: AnimatedContainer(
                                 duration: const Duration(milliseconds: 200),
-                                margin: const EdgeInsets.symmetric(horizontal: 4),
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 4),
                                 padding: const EdgeInsets.symmetric(
                                   vertical: 12,
                                   horizontal: 8,

@@ -26,10 +26,7 @@ extension QrShapePainter on QrShape {
   ) {
     switch (this) {
       case QrShape.square:
-        canvas.drawRect(
-          Rect.fromLTWH(x, y, size, size),
-          paint,
-        );
+        canvas.drawRect(Rect.fromLTWH(x, y, size, size), paint);
         break;
 
       case QrShape.rounded:
@@ -79,7 +76,12 @@ extension QrShapePainter on QrShape {
         );
         // Middle square (background)
         canvas.drawRect(
-          Rect.fromLTWH(x + middleOffset, y + middleOffset, middleSize, middleSize),
+          Rect.fromLTWH(
+            x + middleOffset,
+            y + middleOffset,
+            middleSize,
+            middleSize,
+          ),
           backgroundPaint,
         );
         // Inner square
@@ -103,14 +105,24 @@ extension QrShapePainter on QrShape {
         );
         canvas.drawRRect(
           RRect.fromRectAndRadius(
-            Rect.fromLTWH(x + middleOffset, y + middleOffset, middleSize, middleSize),
+            Rect.fromLTWH(
+              x + middleOffset,
+              y + middleOffset,
+              middleSize,
+              middleSize,
+            ),
             middleRadius,
           ),
           backgroundPaint,
         );
         canvas.drawRRect(
           RRect.fromRectAndRadius(
-            Rect.fromLTWH(x + innerOffset, y + innerOffset, innerSize, innerSize),
+            Rect.fromLTWH(
+              x + innerOffset,
+              y + innerOffset,
+              innerSize,
+              innerSize,
+            ),
             innerRadius,
           ),
           foregroundPaint,

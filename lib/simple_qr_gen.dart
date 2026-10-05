@@ -1,5 +1,7 @@
 library;
 
+export 'package:qr/qr.dart' show QrErrorCorrectLevel;
+
 export 'src/qr_style.dart';
 export 'src/qr_shape.dart';
 export 'src/qr_widget.dart';

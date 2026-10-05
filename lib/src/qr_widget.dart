@@ -122,11 +122,7 @@ class _SimpleQrGenState extends State<SimpleQrGen> {
 
 /// Custom painter for rendering QR codes.
 class _QrPainter extends CustomPainter {
-  _QrPainter({
-    required this.data,
-    required this.style,
-    this.logoImage,
-  });
+  _QrPainter({required this.data, required this.style, this.logoImage});
 
   final String data;
   final QrStyle style;
@@ -134,7 +130,10 @@ class _QrPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final qrImage = QrGenerator.generateQrImage(data, style.errorCorrectionLevel);
+    final qrImage = QrGenerator.generateQrImage(
+      data,
+      style.errorCorrectionLevel,
+    );
     final moduleCount = qrImage.moduleCount;
     final moduleSize = size.width / moduleCount;
 
@@ -142,7 +141,10 @@ class _QrPainter extends CustomPainter {
     final backgroundPaint = Paint()
       ..color = style.backgroundColor
       ..style = PaintingStyle.fill;
-    canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height), backgroundPaint);
+    canvas.drawRect(
+      Rect.fromLTWH(0, 0, size.width, size.height),
+      backgroundPaint,
+    );
 
     // Draw QR modules
     final foregroundPaint = Paint()

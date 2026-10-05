@@ -10,17 +10,23 @@ import 'qr_style.dart';
 class QrGenerator {
   QrGenerator._();
 
-  static QrImage generateQrImage(String data, int errorCorrectionLevel) {
-    final qrCode = QrCode.fromData(
-      data: data,
+  static QrImage generateQrImage(
+    String data,
+    QrErrorCorrectLevel errorCorrectionLevel,
+  ) {
+    final qrCode = QrCode(
+      payload: QrPayload.fromString(data),
       errorCorrectLevel: errorCorrectionLevel,
     );
     return QrImage(qrCode);
   }
 
-  static int getModuleCount(String data, int errorCorrectionLevel) {
-    final qrCode = QrCode.fromData(
-      data: data,
+  static int getModuleCount(
+    String data,
+    QrErrorCorrectLevel errorCorrectionLevel,
+  ) {
+    final qrCode = QrCode(
+      payload: QrPayload.fromString(data),
       errorCorrectLevel: errorCorrectionLevel,
     );
     return qrCode.moduleCount;

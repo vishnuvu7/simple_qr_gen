@@ -10,11 +10,7 @@ import 'qr_style.dart';
 
 /// Result of a QR code share operation.
 class QrShareResult {
-  const QrShareResult({
-    required this.success,
-    this.bytes,
-    this.errorMessage,
-  });
+  const QrShareResult({required this.success, this.bytes, this.errorMessage});
 
   final bool success;
 
@@ -23,7 +19,6 @@ class QrShareResult {
 
   final String? errorMessage;
 }
-
 
 class QrSharer {
   QrSharer._();
@@ -54,10 +49,7 @@ class QrSharer {
         );
 
         await SharePlus.instance.share(
-          ShareParams(
-            files: [xFile],
-            text: shareText,
-          )
+          ShareParams(files: [xFile], text: shareText),
         );
 
         return QrShareResult(success: true, bytes: bytes);
@@ -70,22 +62,14 @@ class QrSharer {
       await file.writeAsBytes(bytes);
 
       await SharePlus.instance.share(
-        ShareParams(
-          files: [XFile(filePath)],
-          text: shareText,
-        )
-
+        ShareParams(files: [XFile(filePath)], text: shareText),
       );
 
       return QrShareResult(success: true, bytes: bytes);
     } catch (e) {
-      return QrShareResult(
-        success: false,
-        errorMessage: e.toString(),
-      );
+      return QrShareResult(success: false, errorMessage: e.toString());
     }
   }
-
 
   static Future<Uint8List> getImageBytes({
     required String data,

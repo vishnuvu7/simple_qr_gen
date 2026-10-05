@@ -12,7 +12,7 @@ class QrStyle {
     this.logo,
     this.logoSize = 50,
     this.logoPadding = 8,
-    this.errorCorrectionLevel = QrErrorCorrectLevel.H,
+    this.errorCorrectionLevel = QrErrorCorrectLevel.high,
     this.gapless = true,
   });
 
@@ -36,11 +36,11 @@ class QrStyle {
 
   /// Error correction level for the QR code.
   /// Higher levels allow more damage but increase QR code size.
-  /// - L: ~7% correction
-  /// - M: ~15% correction
-  /// - Q: ~25% correction
-  /// - H: ~30% correction (recommended when using logos)
-  final int errorCorrectionLevel;
+  /// - low: ~7% correction
+  /// - medium: ~15% correction
+  /// - quartile: ~25% correction
+  /// - high: ~30% correction (recommended when using logos)
+  final QrErrorCorrectLevel errorCorrectionLevel;
 
   /// Whether to render modules without gaps (gapless).
   /// When true, modules are rendered edge-to-edge.
@@ -55,7 +55,7 @@ class QrStyle {
     ImageProvider? logo,
     double? logoSize,
     double? logoPadding,
-    int? errorCorrectionLevel,
+    QrErrorCorrectLevel? errorCorrectionLevel,
     bool? gapless,
   }) {
     return QrStyle(

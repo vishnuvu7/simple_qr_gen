@@ -135,7 +135,7 @@ final bytes = await QrSharer.getImageBytes(
 | `logo` | `ImageProvider?` | `null` | Logo image |
 | `logoSize` | `double` | `50` | Logo size in pixels |
 | `logoPadding` | `double` | `8` | Padding around logo |
-| `errorCorrectionLevel` | `int` | `QrErrorCorrectLevel.H` | Error correction (L/M/Q/H) |
+| `errorCorrectionLevel` | `QrErrorCorrectLevel` | `QrErrorCorrectLevel.high` | Error correction (low/medium/quartile/high) |
 | `gapless` | `bool` | `true` | Render modules edge-to-edge |
 
 ### QrShape
